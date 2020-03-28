@@ -27,9 +27,9 @@ class DataManager:
     id_img_train=[]
     id_img_test=[]
 def __init__(self,nb_test_data = 0.2, pca=False):
-        ###nb_test_data is the percentage of test data from the original file
-        self._nb_test_data = nb_test_data
-        self._pca = pca
+        # nb_test_data is the percentage of test data from the original file
+        self.nb_test_data = nb_test_data
+        self.pca = pca
 def _extractBasicData(self):
         """
         This function generates basic train and test data
@@ -37,23 +37,22 @@ def _extractBasicData(self):
         train = pd.read_csv(self._train_file)
         
         s = LabelEncoder().fit(train.species)  
-        self._classes = list(s.classes_)  
+        self.classes = list(s.classes)  
         classes_labels = s.transform(train.species)
         train = train.drop(['species'], axis=1)
 
-        if self._pca:
+        if self.pca:
             trainX = train.drop(['id'], axis=1)
             pca = PCA(n_components=0.85 ,svd_solver='full')
             pca.fit(trainX)
-            trainX=pca.transform(trainX)
-            train_df=pd.DataFrame.from_records(trainX)
-            train_df.insert(loc=0, column='id', value=train['id'])
-            train=train_df
-
-        sss = StratifiedShuffleSplit(n_splits=1,  test_size=self._nb_test_data, random_state=self._r)
-        for train_index, test_index in sss.split(train, classes_labels):  
+            trainX = pca.transform(trainX)
+            train_df = pd.DataFrame.from_records(trainX)
+            train = train_df.insert(loc=0, column='id', value=train['id'])
+        
+      
+        for train_index, test_index in StratifiedShuffleSplit(n_splits=1, test_size=self._nb_test_data, random_state=self.r).split(train, classes_labels):  
             X_train, X_test = train.values[train_index], train.values[test_index]  
-            self._y_train, self._y_test = classes_labels[train_index], classes_labels[test_index]
+            self.y_train, self.y_test = classes_labels[train_index], classes_labels[test_index]
 
         self.id_img_train =  list(np.int_( X_train[:,0]))
         self.id_img_test =  list(np.int_( X_test[:,0])) 
