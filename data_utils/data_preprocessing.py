@@ -15,7 +15,8 @@ from PIL import Image
 from tqdm import tqdm
 
 class DataPreprocessing:
-	images_repo = "../dataset/images/"    
+    
+    images_repo = "../dataset/images/"    
     r = random.randint(17, 27)
     X_data_train = pd.DataFrame()
     X_data_test = pd.DataFrame()
@@ -28,12 +29,12 @@ class DataPreprocessing:
     classes = []
     id_img_train=[]
     id_img_test=[]
-
-	def __init__(self, nb_test_data = 0.2, pca=False):
-		""" 
+    
+    def __init__(self, nb_test_data = 0.2, pca=False):
+        """ 
 		 nb_test_data is the percentage of test data from the original file
 		"""
-		self.pca = pca
+        self.pca = pca
         self.nb_test_data = nb_test_data
         self.dataset = None
         self.train_data, self.test_data, self.sample_submission = DataLoader().load_data()
