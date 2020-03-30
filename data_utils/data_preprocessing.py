@@ -127,3 +127,42 @@ class DataPreprocessing:
         index_col=j
 
         return index_row, index_col
+
+    def first_bottom_l (self,matrix):
+        """
+        This function extracts index of the first white pixel from bottom to top
+        matrix: matrix of the image
+        return: index_row :row number
+                index_col :column number
+        """
+        i=len(matrix[:,0])-1   
+        while max(matrix[i,:])!=float(1):
+            i=i-1
+
+        index_row=i
+
+        j=0   
+        while matrix[i,j]!=float(1):
+            j=j+1
+
+        index_col=j
+
+        return index_row, index_col
+
+    def remove_black_frame(self,image):
+        """
+        This function removes black frame surrounding the leaf in the image
+        image: image object
+        return: result :image object
+        """        
+        image_array = np.asarray(image) #image to array
+
+        left_r, left_c = self.first_left_t (image_array)
+        right_r, right_c = self.first_right_t (image_array)
+        top_r, top_c = self.first_top_l (image_array)
+        bottom_r, bottom_c = self.first_bottom_l (image_array)
+
+        image_array = image_array[top_r:bottom_r+1,left_c:right_c+1]
+        result = Image.fromarray(image_array) #array to image
+
+        return result   #return an image
