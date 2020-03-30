@@ -179,3 +179,49 @@ class DataPreprocessing:
         black = round(100*n0/nt,2) 
         white = round(100*n1/nt,2)  
         return black, white
+
+    def ratio_width_length(self,image):
+        """
+        This function calculates the ratio between width & length
+        image: image object
+        return: width/length: ratio
+        """                
+        width, length =image.size  #largeur image[1,:],longueur image[:,1]
+        return width/length
+
+    def contour_Features(self,imagefile):   
+        """
+        This function calculates different image features based on contour-detection 
+        imagefile: image path
+        return: peak: nb of peaks of the contour
+                eccentricity: eccentricity of the ellipse that fits the contour
+                angle: deviation of the ellipse that fits the contour
+                m: gradient of the line that fits the contour
+                y0: image of the abscissa 0 by the equation of the line that fits the contour
+        """
+        original_color = cv2.imread(imagefile)
+        original = cv2.cvtColor(original_color, cv2.COLOR_RGB2GRAY)
+        blur = cv2.GaussianBlur(original,(5,5),0)
+        ret, thresh = cv2.threshold(blur,50,255,cv2.THRESH_BINARY)
+        edges = cv2.Canny(thresh,100,200)
+        contours, hierarchy = cv2.findContours(edges.copy(),cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+        LENGTH = len(contours)            
+        big_cnt = np.vstack([contours[c] for c in range (0,LENGTH)])
+        perimetre = cv2.arcLength(big_cnt,True)
+        approx = cv2.approxPolyDP(big_cnt,0.01*perimetre,True)
+
+        peak = len(approx)
+
+        # angle at which object is directed Major Axis and Minor Axis lengths.
+        (x, y), (MA, ma), angle = cv2.fitEllipse(big_cnt)
+
+        a = ma / 2
+        b = MA / 2
+        eccentricity = math.sqrt(pow(a, 2) - pow(b, 2))
+        eccentricity = round(eccentricity / a, 2)
+
+        [vx,vy,x,y] = cv2.fitLine(big_cnt, cv2.DIST_L2,0,0.01,0.01) #vx,vy are normalized vector collinear to the line and x0,y0 is a point on the line
+        m=vy[0]/vx[0]
+        y0=y[0]-m*x[0]
+
+        return peak, eccentricity, angle, m, y0
