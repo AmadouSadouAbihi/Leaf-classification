@@ -256,3 +256,15 @@ class DataPreprocessing:
         
         return pd.DataFrame(data=image_data, columns=['black_pxl%', 'white_pxl%', 'ratio_W/L','nb_peak','ellipse_eccentricity','ellipse_deviation','line_gradient','line_y0'])
 
+    def extractImageData(self):
+        """
+        This function apply the function extractImageData to train and test data
+        """ 
+        if len(self.id_img_train) == 0 or len(self.id_img_test) == 0  :
+            self.loadBasicData()
+
+        if len(self.X_img_train) == 0:
+            self.X_img_train=self.extractImagesCaracteristics(self.id_img_train).to_numpy()
+
+        if len(self.X_img_test) == 0:
+            self.X_img_test=self.extractImagesCaracteristics(self.id_img_test).to_numpy()
