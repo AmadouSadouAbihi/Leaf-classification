@@ -127,3 +127,24 @@ class DataPreprocessing:
         index_col=j
 
         return index_row, index_col
+
+    def first_bottom_l (self,matrix):
+        """
+        This function extracts index of the first white pixel from bottom to top
+        matrix: matrix of the image
+        return: index_row :row number
+                index_col :column number
+        """
+        i=len(matrix[:,0])-1   
+        while max(matrix[i,:])!=float(1):
+            i=i-1
+
+        index_row=i
+
+        j=0   
+        while matrix[i,j]!=float(1):
+            j=j+1
+
+        index_col=j
+
+        return index_row, index_col
