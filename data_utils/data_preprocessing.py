@@ -69,7 +69,7 @@ class DataPreprocessing:
         self.X_data_train = np.delete(X_train, 0, 1)
         self.X_data_test = np.delete(X_test, 0, 1)
 
-    def first_right_t (self,matrix):
+    def first_right_to_left (self,matrix):
         """
         This function extracts index of the first white pixel from right to left
         matrix: matrix of the image
@@ -90,7 +90,7 @@ class DataPreprocessing:
 
         return index_row, index_col
 
-    def first_left_t (self,matrix):
+    def first_left_to_right(self,matrix):
         """
         This function extracts index of the first white pixel from left to right
         matrix: matrix of the image
@@ -107,7 +107,7 @@ class DataPreprocessing:
         index_row=i
         return index_row, index_col
     
-    def first_top_l (self,matrix):  
+    def first_top_to_bottom (self,matrix):  
         """
         This function extracts index of the first white pixel from top to bottom
         matrix: matrix of the image
@@ -128,7 +128,7 @@ class DataPreprocessing:
 
         return index_row, index_col
 
-    def first_bottom_l (self,matrix):
+    def first_bottom_to_top (self,matrix):
         """
         This function extracts index of the first white pixel from bottom to top
         matrix: matrix of the image
@@ -155,14 +155,14 @@ class DataPreprocessing:
         image: image object
         return: result :image object
         """        
-        image_array = np.asarray(image) #image to array
+        image_array = np.asarray(image) 
 
-        left_r, left_c = self.first_left_t (image_array)
-        right_r, right_c = self.first_right_t (image_array)
-        top_r, top_c = self.first_top_l (image_array)
-        bottom_r, bottom_c = self.first_bottom_l (image_array)
+        left_r, left_c = self.first_left_to_right (image_array)
+        right_r, right_c = self.first_right_to_left(image_array)
+        top_r, top_c = self.first_top_to_bottom (image_array)
+        bottom_r, bottom_c = self.first_bottom_to_top (image_array)
 
         image_array = image_array[top_r:bottom_r+1,left_c:right_c+1]
-        result = Image.fromarray(image_array) #array to image
+        result = Image.fromarray(image_array) 
 
         return result   #return an image
