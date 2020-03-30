@@ -1,0 +1,8 @@
+  
+numpy
+scipy
+scikit-learn
+tqdm
+pillow
+imagehash
+opencv-python
