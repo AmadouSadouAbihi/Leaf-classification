@@ -225,3 +225,34 @@ class DataPreprocessing:
         y0=y[0]-m*x[0]
 
         return peak, eccentricity, angle, m, y0
+    
+    def extractImagesCaracteristics(self,N):
+        """
+        This function calculates all image features using the previous methods
+        N: list that contains ids of the images
+        9 features for each image, nb_images=1584
+        return: a dataframe of the features
+        """   
+        image_data= [[0] * 8 for _ in range(len(N))]  
+
+        for i in tqdm(range(0,len(N))):
+            imagefile=self.images_repo+str(N[i])+".jpg"
+            image = Image.open(imagefile)
+            image = image.convert('1')
+            image = self.remove_frame(image)
+
+            #percentage of black and white pixels
+            image_data[i][0], image_data[i][1] = self.percentage_blackWhite(image) 
+             
+            image_data[i][2] = self.ratio_width_length(image)
+
+            peak, eccentricity, angle ,m ,y0 = self.contour_Features(imagefile)
+            
+            image_data[i][3] = peak
+            image_data[i][4] = eccentricity
+            image_data[i][5] = angle
+            image_data[i][6] = m
+            image_data[i][7] = y0
+        
+        return pd.DataFrame(data=image_data, columns=['black_pxl%', 'white_pxl%', 'ratio_W/L','nb_peak','ellipse_eccentricity','ellipse_deviation','line_gradient','line_y0'])
+
