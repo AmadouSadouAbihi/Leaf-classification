@@ -39,7 +39,7 @@ class DataPreprocessing:
         self.dataset = None
         self.train_data, self.test_data, self.sample_submission = DataLoader().load_data()
         
-    def extractBasicData(self):
+    def loadtBasicData(self):
         """
         This function generates basic train and test data
         """
@@ -50,7 +50,7 @@ class DataPreprocessing:
         classes_labels = s.transform(train.species)
         train = train.drop(['species'], axis=1)
 
-        if self._pca:
+        if self.pca:
             trainX = train.drop(['id'], axis=1)
             pca = PCA(n_components=0.85 ,svd_solver='full')
             pca.fit(trainX)
@@ -59,10 +59,10 @@ class DataPreprocessing:
             train_df.insert(loc=0, column='id', value=train['id'])
             train=train_df
 
-        sss = StratifiedShuffleSplit(n_splits=1,  test_size=self._nb_test_data, random_state=self._r)
-        for train_index, test_index in sss.split(train, classes_labels):  
+    
+        for train_index, test_index in StratifiedShuffleSplit(n_splits=1,  test_size=self.nb_test_data, random_state=self.r).split(train, classes_labels):  
             X_train, X_test = train.values[train_index], train.values[test_index]  
-            self._y_train, self._y_test = classes_labels[train_index], classes_labels[test_index]
+            self.t_train, self.t_test = classes_labels[train_index], classes_labels[test_index]
 
         self.id_img_train =  list(np.int_( X_train[:,0]))
         self.id_img_test =  list(np.int_( X_test[:,0])) 
@@ -90,7 +90,7 @@ class DataPreprocessing:
 
         return index_row, index_col
 
-    def _first_left_t (self,matrix):
+    def first_left_t (self,matrix):
         """
         This function extracts index of the first white pixel from left to right
         matrix: matrix of the image
@@ -105,4 +105,25 @@ class DataPreprocessing:
         while matrix[i,j]!=float(1):
             i=i+1
         index_row=i
+        return index_row, index_col
+    
+    def first_top_l (self,matrix):  
+        """
+        This function extracts index of the first white pixel from top to bottom
+        matrix: matrix of the image
+        return: index_row :row number
+                index_col :column number
+        """
+        i=0   
+        while max(matrix[i,:])!=float(1):
+            i=i+1
+
+        index_row=i
+
+        j=0  
+        while matrix[i,j]!=float(1):
+            j=j+1
+
+        index_col=j
+
         return index_row, index_col
