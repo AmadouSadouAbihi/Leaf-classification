@@ -148,3 +148,21 @@ class DataPreprocessing:
         index_col=j
 
         return index_row, index_col
+
+    def remove_black_frame(self,image):
+        """
+        This function removes black frame surrounding the leaf in the image
+        image: image object
+        return: result :image object
+        """        
+        image_array = np.asarray(image) #image to array
+
+        left_r, left_c = self._first_left_t (image_array)
+        right_r, right_c = self._first_right_t (image_array)
+        top_r, top_c = self._first_top_l (image_array)
+        bottom_r, bottom_c = self._first_bottom_l (image_array)
+
+        image_array = image_array[top_r:bottom_r+1,left_c:right_c+1]
+        result = Image.fromarray(image_array) #array to image
+
+        return result   #return an image
