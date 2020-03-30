@@ -166,3 +166,4 @@ class DataPreprocessing:
         result = Image.fromarray(image_array) 
 
         return result   #return an image
+    # to be continued 
