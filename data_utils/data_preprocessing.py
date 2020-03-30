@@ -179,3 +179,12 @@ class DataPreprocessing:
         black = round(100*n0/nt,2) 
         white = round(100*n1/nt,2)  
         return black, white
+
+    def ratio_width_length(self,image):
+        """
+        This function calculates the ratio between width & length
+        image: image object
+        return: width/length: ratio
+        """                
+        width, length =image.size  #largeur image[1,:],longueur image[:,1]
+        return width/length
