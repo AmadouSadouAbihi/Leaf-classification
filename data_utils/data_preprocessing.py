@@ -31,9 +31,9 @@ class DataPreprocessing:
     id_img_test=[]
     
     def __init__(self, nb_test_data = 0.2, pca=False):
-        """ 
-		 nb_test_data is the percentage of test data from the original file
-		"""
+        """
+        nb_test_data is the percentage of test data from the original file
+        """
         self.pca = pca
         self.nb_test_data = nb_test_data
         self.dataset = None
