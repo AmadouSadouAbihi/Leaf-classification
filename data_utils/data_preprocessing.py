@@ -68,3 +68,24 @@ class DataPreprocessing:
         self.id_img_test =  list(np.int_( X_test[:,0])) 
         self.X_data_train = np.delete(X_train, 0, 1)
         self.X_data_test = np.delete(X_test, 0, 1)
+
+    def first_right_t (self,matrix):
+        """
+        This function extracts index of the first white pixel from right to left
+        matrix: matrix of the image
+        return: index_row :row number
+                index_col :column number
+        """
+        j=len(matrix[0,:])-1   
+        while max(matrix[:,j])!=float(1):
+            j=j-1
+
+        index_col=j
+
+        i=0   
+        while matrix[i,j]!=float(1):
+            i=i+1
+
+        index_row=i
+
+        return index_row, index_col
