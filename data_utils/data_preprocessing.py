@@ -166,4 +166,16 @@ class DataPreprocessing:
         result = Image.fromarray(image_array) 
 
         return result   #return an image
-    # to be continued 
+    
+    def percentage_blackWhite(self,image):
+        """
+        This function calculates the percentage of black and white pixels in the image
+        image: image object
+        return: p0: percentage of black pixels
+                p1:percentage of white pixels
+        """        
+        h = image.histogram()
+        nt, n0, n1 = sum(h), h[0], h[-1]
+        black = round(100*n0/nt,2) 
+        white = round(100*n1/nt,2)  
+        return black, white
