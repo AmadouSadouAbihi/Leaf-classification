@@ -89,3 +89,20 @@ class DataPreprocessing:
         index_row=i
 
         return index_row, index_col
+
+    def _first_left_t (self,matrix):
+        """
+        This function extracts index of the first white pixel from left to right
+        matrix: matrix of the image
+        return: index_row :row number
+                index_col :column number
+        """
+        j=0
+        while max(matrix[:,j])!=float(1):
+            j=j+1
+        index_col=j
+        i=0
+        while matrix[i,j]!=float(1):
+            i=i+1
+        index_row=i
+        return index_row, index_col
