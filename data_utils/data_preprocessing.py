@@ -268,3 +268,25 @@ class DataPreprocessing:
 
         if len(self.X_img_test) == 0:
             self.X_img_test=self.extractImagesCaracteristics(self.id_img_test).to_numpy()
+    
+    #Public Methods 
+
+    def loadNumericTrainData(self):
+        """
+        This function calls the private function loadBasicData() to extract train data
+        :return: X_data_train: Train matrix
+        """
+        if len(self.X_data_train)==0 :
+            self.loadBasicData()
+
+        return self.X_data_train 
+
+    def loadNumericTestData(self):          
+        """
+        This function calls the private function loadBasicData() to extract test data
+        :return: X_data_test : Test matrix
+        """
+        if len(self.X_data_test)==0 :
+            self.loadBasicData()
+
+        return  self.X_data_test
