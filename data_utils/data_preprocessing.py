@@ -340,3 +340,29 @@ class DataPreprocessing:
             self.loadBasicData()
 
         return self.X_img_test
+
+    def combineNumericAndImageTrainData(self):          
+        """
+        This function merge basic train data with image features
+        :return: _X_train: Train matrix
+        """
+        if len(self.X_all_train)==0:
+            if len(self.X_img_train)==0 :
+                self.loadBasicData()
+
+            self.X_all_train=np.concatenate((self.X_data_train, self.X_img_train), axis=1)
+
+        return self.X_all_train
+
+    def combineNumericAndImageTestData(self):          
+        """
+        This function merge basic train data with image features
+        :return: _X_test: Test matrix
+        """
+        if len(self.X_all_test)==0:
+            if len(self.X_img_test)==0 :
+                self.loadBasicData()
+
+            self.X_all_test=np.concatenate((self.X_data_test, self.X_img_test), axis=1)
+
+        return self.X_all_test
