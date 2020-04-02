@@ -290,3 +290,23 @@ class DataPreprocessing:
             self.loadBasicData()
 
         return  self.X_data_test
+
+    def getTrainTargets(self):        
+        """
+        This function calls the private function loadBasicData() to extract train Targets if they aren't already extracted
+        :return: A vector of data classes
+        """
+        if len(self.t_train)==0 :
+            self.loadBasicData()
+
+        return self.t_train
+    
+    def getTestTargets(self):
+        """
+        This function calls the private function loadBasicData() to extract test Targets if they aren't already extracted
+        :return: A vector of data classes
+        """  
+        if len(self.t_test)==0 :
+            self.loadBasicData()
+
+        return self.t_test
