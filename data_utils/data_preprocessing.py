@@ -310,3 +310,13 @@ class DataPreprocessing:
             self.loadBasicData()
 
         return self.t_test
+    
+    def getListOfClasses(self):
+        """
+        This function  lists all the classes
+        :return: vector of all classes
+        """ 
+        if len(self.classes)==0 :
+            self.loadBasicData()
+
+        return self.classes
