@@ -320,3 +320,23 @@ class DataPreprocessing:
             self.loadBasicData()
 
         return self.classes
+    
+    def loadImageTrainData(self):          
+        """
+        This function extract image features for train data
+        :return: _X_img_train : Train image features matrix
+        """
+        if len(self.X_img_train)==0 :
+            self.loadBasicData()
+
+        return self.X_img_train
+ 
+    def loadImageTestData(self):          
+        """
+        This function extract image features for test data
+        :return: X_img_test  : Test image features matrix
+        """
+        if len(self.X_img_test)==0:
+            self.loadBasicData()
+
+        return self.X_img_test
