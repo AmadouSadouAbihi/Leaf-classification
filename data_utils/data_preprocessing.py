@@ -290,3 +290,79 @@ class DataPreprocessing:
             self.loadBasicData()
 
         return  self.X_data_test
+
+    def getTrainTargets(self):        
+        """
+        This function calls the private function loadBasicData() to extract train Targets if they aren't already extracted
+        :return: A vector of data classes
+        """
+        if len(self.t_train)==0 :
+            self.loadBasicData()
+
+        return self.t_train
+    
+    def getTestTargets(self):
+        """
+        This function calls the private function loadBasicData() to extract test Targets if they aren't already extracted
+        :return: A vector of data classes
+        """  
+        if len(self.t_test)==0 :
+            self.loadBasicData()
+
+        return self.t_test
+    
+    def getListOfClasses(self):
+        """
+        This function  lists all the classes
+        :return: vector of all classes
+        """ 
+        if len(self.classes)==0 :
+            self.loadBasicData()
+
+        return self.classes
+    
+    def loadImageTrainData(self):          
+        """
+        This function extract image features for train data
+        :return: _X_img_train : Train image features matrix
+        """
+        if len(self.X_img_train)==0 :
+            self.loadBasicData()
+
+        return self.X_img_train
+ 
+    def loadImageTestData(self):          
+        """
+        This function extract image features for test data
+        :return: X_img_test  : Test image features matrix
+        """
+        if len(self.X_img_test)==0:
+            self.loadBasicData()
+
+        return self.X_img_test
+
+    def combineNumericAndImageTrainData(self):          
+        """
+        This function merge basic train data with image features
+        :return: _X_train: Train matrix
+        """
+        if len(self.X_all_train)==0:
+            if len(self.X_img_train)==0 :
+                self.loadBasicData()
+
+            self.X_all_train=np.concatenate((self.X_data_train, self.X_img_train), axis=1)
+
+        return self.X_all_train
+
+    def combineNumericAndImageTestData(self):          
+        """
+        This function merge basic train data with image features
+        :return: _X_test: Test matrix
+        """
+        if len(self.X_all_test)==0:
+            if len(self.X_img_test)==0 :
+                self.loadBasicData()
+
+            self.X_all_test=np.concatenate((self.X_data_test, self.X_img_test), axis=1)
+
+        return self.X_all_test
