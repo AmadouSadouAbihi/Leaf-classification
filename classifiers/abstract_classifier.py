@@ -73,4 +73,5 @@ class AbstractClassifier:
 
         cross_validate_model = CrossValidation(self.model, hyperparameters, kfold)
         cross_validate_model.fit_and_predict(self.X_train, self.t_train, self.X_test, self.t_test, metrics)
+        
         return cross_validate_model.get_score(self.X_test, self.Y_test)
