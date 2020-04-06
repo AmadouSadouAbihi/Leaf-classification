@@ -24,23 +24,23 @@ class AbstractClassifier:
 
         if approch == '1': # Only basic data without PCA
             self.X_train, self.X_test = DataPreprocessing(pca=False).loadtBasicData()
-            self.t_train = DataPreprocessing().getTrainTargets()
-            self.t_test = DataPreprocessing().getTestTargets()
+            self.t_train = DataPreprocessing(pca=False).getTrainTargets()
+            self.t_test = DataPreprocessing(pca=False).getTestTargets()
 
         elif approch== '2': # Only basic data without PCA
             self.X_train, self.X_test = DataPreprocessing(pca=True).loadtBasicData()
-            self.t_train = DataPreprocessing().getTrainTargets()
-            self.t_test = DataPreprocessing().getTestTargets()
+            self.t_train = DataPreprocessing(pca=True).getTrainTargets()
+            self.t_test = DataPreprocessing(pca=True).getTestTargets()
 
         elif approch == '3': # Only combined data without PCA
             self.X_train, self.X_test = DataPreprocessing(pca=False).combineNumericAndImageTrainData()
-            self.t_train = DataPreprocessing().getTrainTargets()
-            self.t_test = DataPreprocessing().getTestTargets()
+            self.t_train = DataPreprocessing(pca=False).getTrainTargets()
+            self.t_test = DataPreprocessing(pca=False).getTestTargets()
 
         elif approch == '4': # Only combined data with PCA
             self.X_train, self.X_test = DataPreprocessing(pca=True).combineNumericAndImageTrainData()
-            self.t_train = DataPreprocessing().getTrainTargets()
-            self.t_test = DataPreprocessing().getTestTargets()
+            self.t_train = DataPreprocessing(pca=True).getTrainTargets()
+            self.t_test = DataPreprocessing(pca=True).getTestTargets()
 
 
 
