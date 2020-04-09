@@ -18,8 +18,7 @@ class AbstractClassifier:
         t_test : The targets of training data (the ground truth label)
     """
     def __init__(self, model, approch='0'):
-
-    	self.model = model
+        self.model = model
         self.metrics = Metrics()
 
         if approch == '1': # Only basic data without PCA
@@ -57,7 +56,7 @@ class AbstractClassifier:
          label : Training | Testing 
          metrics : accuracy | confusion_matrics
         """
-    	if label == 'Training':
+        if label == 'Training':
             x, y = self.X_train, self.t_train
         else:
             x, y = self.X_test, self.t_test

@@ -5,7 +5,6 @@ from sklearn.ensemble import AdaBoostClassifier
 from classifiers.abstract_classifier import AbstractClassifier
 
 
-class AdaBoostClassifier(AbstractClassifier):
-
+class AdaBoostAlgorithmClassifier(AbstractClassifier):
     def __init__(self, approch='0'):
         super().__init__(AdaBoostClassifier(n_estimators=50, learning_rate=1), approch)
