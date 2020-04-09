@@ -52,7 +52,7 @@ class DataPreprocessing:
 
         if self.pca:
             trainX = train.drop(['id'], axis=1)
-            pca = PCA(n_components=0.85 ,svd_solver='full')
+            pca = PCA(n_components=0.9 ,svd_solver='full')
             pca.fit(trainX)
             trainX=pca.transform(trainX)
             train_df=pd.DataFrame.from_records(trainX)
