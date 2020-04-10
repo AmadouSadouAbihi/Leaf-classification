@@ -8,7 +8,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 class Metrics:
 
     def accuracy(self, model, t, x=None, label=None, pred=None):
-    	"""
+        """
     	   label : Training | testing
     	"""
         if pred is None:
@@ -27,7 +27,7 @@ class Metrics:
 
             plt.title("CONFUSION MATRIX VISUALIZATION OF THE "+label.upper())
 
-        else:
+       else:
             plt.imshow(confusion_matrix(y, pred), interpolation='nearest', cmap=plt.cm.Blues)
 
             for i in range(confusion_matrix(y, pred).shape[0]):
@@ -36,10 +36,10 @@ class Metrics:
 
             plt.title("CONFUSION MATRIX VISUALIZATION AFTER VALIDATION ")
 
-        plt.ylabel("True Values")
-        plt.xlabel("Predicted Values")
-        plt.xticks([])
-        plt.yticks([])
-        plt.show()
+            plt.ylabel("True Values")
+            plt.xlabel("Predicted Values")
+            plt.xticks([])
+            plt.yticks([])
+            plt.show()
 
     
