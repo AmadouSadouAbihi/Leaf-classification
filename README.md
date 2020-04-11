@@ -34,7 +34,7 @@ approche_de_resolution_du_probleme : 1 | 2 | 3 | 4
 
 ## Lecture:
 
- Nous avons également rédiger un rapport [report.pdf](report.pdf). Merci de bien vouloir le lir pour plus de détails.
+ Nous avons également rédiger un rapport [report.pdf](report.pdf). Merci de bien vouloir le lire pour plus de détails.
 
 
 
