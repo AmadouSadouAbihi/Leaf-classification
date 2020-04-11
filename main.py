@@ -49,7 +49,7 @@ def main():
                 		'gamma': [1, 0.1, 0.01, 0.001, 0.0001],
                 		'kernel':  ['rbf', 'sigmoid']
                 	}
-           model.tunning_model(hyperparameters, kfold, sys.argv[2])  
+           model.setting_model(hyperparameters, kfold, sys.argv[2])  
     elif sys.argv[1] == 'adaboost':
         if sys.argv[2] in ['accuracy', 'confusion_matrix']:
             kfold = 5
@@ -67,7 +67,7 @@ def main():
     elif sys.argv[1] == 'neural_network':
         if sys.argv[2] in ['accuracy', 'confusion_matrix']:
             kfold = 5
-            model = Neuralnetwork(approch=sys.argv[3])
+            model = NeuralnetworkClassifier(approch=sys.argv[3])
             model.train()
             model.evaluate(label="Training", metrics=sys.argv[2])
             model.evaluate(label="Testing", metrics=sys.argv[2])
@@ -78,7 +78,7 @@ def main():
                 		'alpha': [1e-5, 3e-4],
                 		'learning_rate_init':  [1e-2, 1e-3]
                 	}
-            model.tunning_model(hyperparameters, kfold, sys.argv[2])
+            model.setting_model(hyperparameters, kfold, sys.argv[2])
     elif sys.argv[1] == 'linear_discriminant':
         if sys.argv[2] in ['accuracy', 'confusion_matrix']:
             kfold = 5
@@ -92,6 +92,6 @@ def main():
                 		'solver': ['liblinear','identity', 'relu', 'tanh'],
                 		'max_iter': [10000]
                 	}
-            model.tunning_model(hyperparameters, kfold, sys.argv[2])		                    
+            model.setting_model(hyperparameters, kfold, sys.argv[2])		                    
 if __name__ == "__main__":
     main()

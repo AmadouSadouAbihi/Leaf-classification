@@ -7,14 +7,14 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 class Metrics:
 
-    def accuracy(self, model, t, x=None, label=None, pred=None):
+    def accuracy(self, model, y, x=None, label=None, pred=None):
         """
     	   label : Training | testing
     	"""
         if pred is None:
-            print(label + ' accuracy', round(model.score(x, t) * 100, 2), " %")
+            print(label + ' accuracy', round(model.score(x, y) * 100, 2), " %")
         else:
-            print('Testing accuracy after cross-validation ', round(metrics.accuracy_score(pred,t) * 100, 2), " %")
+            print('Testing accuracy after cross-validation ', round(metrics.accuracy_score(pred,y) * 100, 2), " %")
 
 
     def confusion_matrix(self, model, y, x=None, label=None, pred=None):
@@ -41,5 +41,9 @@ class Metrics:
             plt.xticks([])
             plt.yticks([])
             plt.show()
+   
+
+            
+    
 
     
