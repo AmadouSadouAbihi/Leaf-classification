@@ -15,7 +15,7 @@ from PIL import Image
 from tqdm import tqdm
 
 class DataPreprocessing:
-    
+    train_repo = "../dataset/train.csv"
     images_repo = "../dataset/images/"    
     r = random.randint(17, 27)
     X_data_train = pd.DataFrame()
@@ -37,13 +37,13 @@ class DataPreprocessing:
         self.pca = pca
         self.nb_test_data = nb_test_data
         self.dataset = None
-        self.train_data, self.test_data, self.sample_submission = DataLoader().load_data()
+        self.train_data, self.test_data = DataLoader().load_data()
         
     def loadtBasicData(self):
         """
         This function generates basic train and test data
         """
-        train = pd.read_csv(self.train_data)
+        train = pd.read_csv(train_repo)
         
         s = LabelEncoder().fit(train.species)  
         self.classes = list(s.classes_)  
