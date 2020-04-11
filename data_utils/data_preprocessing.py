@@ -43,7 +43,7 @@ class DataPreprocessing:
         """
         This function generates basic train and test data
         """
-        train = pd.read_csv(train_repo)
+        train = pd.read_csv(self.train_repo)
         
         s = LabelEncoder().fit(train.species)  
         self.classes = list(s.classes_)  
