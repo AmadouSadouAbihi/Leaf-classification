@@ -1,3 +1,9 @@
+#####
+#   BA    Amadou     16 187 314 
+#   YING  Xu         18 205 032
+#   ABOU Hamza       17 057 836
+###
+
 import os, sys
 
 sys.path.append(os.path.dirname(os.path.join(os.getcwd())))

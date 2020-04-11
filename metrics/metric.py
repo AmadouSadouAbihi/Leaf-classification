@@ -1,3 +1,8 @@
+#####
+#   BA    Amadou     16 187 314 
+#   YING  Xu         18 205 032
+#   ABOU Hamza       17 057 836
+###
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from sklearn import metrics
