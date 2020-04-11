@@ -6,8 +6,8 @@ from sklearn import  tree
 from classifiers.logistic_regression import LogisticRegressionClassifier
 from classifiers.random_forest import RandomForestAlgorithmClassifier
 from classifiers.svm_classifier import SVMClassifier
-from classifiers.adaboost import AdaBoostAlgorithmClassifier
-from classifiers.Neural_network import Neuralnetwork
+from classifiers.AdaBoost_classifier import AdaBoostAlgorithmClassifier
+from classifiers.Neural_network import NeuralnetworkClassifier
 from classifiers.LinearDiscriminantAnalysis_Classifier import LinearDiscriminantClassifier
 
 # python3 classifier  metirics approch
