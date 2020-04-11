@@ -2,9 +2,9 @@
 
 Ce projet s'inscrit dans le cadre du projet de session du cours de Machine Learning de l'université de Sherbrooke sous la supervision du professeur Pierre Marc Jodoin et il a été realisé par un équipe de trois étudiants:
  
-* BA Amadou    amadou.ba@usherbrooke.ca   16 187 314
-* YING Xu      ying.xu@usherbrooke.ca     18 205 032
-* HAMZA Abdou  Hamza.abdou@usherrooke.ca  17 057 836 
+* BA Amadou    amadou.ba@usherbrooke.ca      16 187 314
+* YING Xu      ying.xu@usherbrooke.ca        18 205 032
+* HAMZA Abdou  Hamza.abdou@usherrooke.ca     17 057 836 
 
 
 ## Ce qui est prérequis:
