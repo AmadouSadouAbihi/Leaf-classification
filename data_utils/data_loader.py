@@ -14,6 +14,6 @@ class DataLoader:
         """
         self.train_data = pd.read_csv(os.path.join(self.path, 'train.csv'))
         self.test_data = pd.read_csv(os.path.join(self.path, 'test.csv'))
-        sample_submission = pd.read_csv(os.path.join(self.path, 'sample_submission.csv'))
+        
 
-        return self.train_data, self.test_data, sample_submission
+        return self.train_data, self.test_data
