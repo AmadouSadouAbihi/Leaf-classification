@@ -38,12 +38,14 @@ class DataPreprocessing:
         self.nb_test_data = nb_test_data
         self.dataset = None
         self.train_data, self.test_data = DataLoader().load_data()
+        self.path = 'dataset'
+        self.imagepath='images/'
         
-    def loadtBasicData(self):
+    def loadBasicData(self):
         """
         This function generates basic train and test data
         """
-        train = pd.read_csv(self.train_repo)
+        train = pd.read_csv(os.path.join(self.path, 'train.csv'))
         
         s = LabelEncoder().fit(train.species)  
         self.classes = list(s.classes_)  
@@ -236,10 +238,10 @@ class DataPreprocessing:
         image_data= [[0] * 8 for _ in range(len(N))]  
 
         for i in tqdm(range(0,len(N))):
-            imagefile=self.images_repo+str(N[i])+".jpg"
+            imagefile=self.path+'/'+self.imagepath+str(N[i])+".jpg"
             image = Image.open(imagefile)
             image = image.convert('1')
-            image = self.remove_frame(image)
+            image = self.remove_black_frame(image)
 
             #percentage of black and white pixels
             image_data[i][0], image_data[i][1] = self.percentage_blackWhite(image) 
@@ -327,7 +329,7 @@ class DataPreprocessing:
         :return: _X_img_train : Train image features matrix
         """
         if len(self.X_img_train)==0 :
-            self.loadBasicData()
+            self.extractImageData()
 
         return self.X_img_train
  
@@ -337,7 +339,7 @@ class DataPreprocessing:
         :return: X_img_test  : Test image features matrix
         """
         if len(self.X_img_test)==0:
-            self.loadBasicData()
+            self.extractImageData()
 
         return self.X_img_test
 
@@ -348,7 +350,8 @@ class DataPreprocessing:
         """
         if len(self.X_all_train)==0:
             if len(self.X_img_train)==0 :
-                self.loadBasicData()
+                self.extractImageData()
+        
 
             self.X_all_train=np.concatenate((self.X_data_train, self.X_img_train), axis=1)
 
@@ -361,7 +364,7 @@ class DataPreprocessing:
         """
         if len(self.X_all_test)==0:
             if len(self.X_img_test)==0 :
-                self.loadBasicData()
+                self.extractImageData()
 
             self.X_all_test=np.concatenate((self.X_data_test, self.X_img_test), axis=1)
 

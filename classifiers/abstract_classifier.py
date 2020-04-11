@@ -22,22 +22,26 @@ class AbstractClassifier:
         self.metrics = Metrics()
 
         if approch == '1': # Only basic data without PCA
-            self.X_train, self.X_test = DataPreprocessing(pca=False).loadtBasicData()
+            self.X_train = DataPreprocessing(pca=False).loadNumericTrainData()
+            self.X_test = DataPreprocessing(pca=False).loadNumericTestData()
             self.t_train = DataPreprocessing(pca=False).getTrainTargets()
             self.t_test = DataPreprocessing(pca=False).getTestTargets()
 
         elif approch== '2': # Only basic data without PCA
-            self.X_train, self.X_test = DataPreprocessing(pca=True).loadtBasicData()
+            self.X_train = DataPreprocessing(pca=True).loadNumericTrainData()
+            self.X_test = DataPreprocessing(pca=True).loadNumericTestData()
             self.t_train = DataPreprocessing(pca=True).getTrainTargets()
             self.t_test = DataPreprocessing(pca=True).getTestTargets()
 
         elif approch == '3': # Only combined data without PCA
-            self.X_train, self.X_test = DataPreprocessing(pca=False).combineNumericAndImageTrainData()
+            self.X_test = DataPreprocessing(pca=False).combineNumericAndImageTestData()
+            self.X_train = DataPreprocessing(pca=False).combineNumericAndImageTrainData()
             self.t_train = DataPreprocessing(pca=False).getTrainTargets()
             self.t_test = DataPreprocessing(pca=False).getTestTargets()
 
         elif approch == '4': # Only combined data with PCA
-            self.X_train, self.X_test = DataPreprocessing(pca=True).combineNumericAndImageTrainData()
+            self.X_test = DataPreprocessing(pca=True).combineNumericAndImageTestData() 
+            self.X_train= DataPreprocessing(pca=True).combineNumericAndImageTrainData()
             self.t_train = DataPreprocessing(pca=True).getTrainTargets()
             self.t_test = DataPreprocessing(pca=True).getTestTargets()
 
@@ -73,4 +77,4 @@ class AbstractClassifier:
         cross_validate_model = CrossValidation(self.model, hyperparameters, kfold)
         cross_validate_model.fit_and_predict(self.X_train, self.t_train, self.X_test, self.t_test, metrics)
         
-        return cross_validate_model.get_score(self.X_test, self.Y_test)
+        return cross_validate_model.get_score(self.X_test, self.t_test)
