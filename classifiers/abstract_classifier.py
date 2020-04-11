@@ -1,6 +1,6 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.join(os.getcwd())))
-from metrics.metrics import Metrics
+from metrics.metric import Metrics
 from data_utils.data_preprocessing import DataPreprocessing
 from cross_validation.cross_validation import CrossValidation
 
