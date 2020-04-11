@@ -1,5 +1,3 @@
-import os, sys
-sys.path.append(os.path.dirname(os.path.join(os.getcwd())))
 import numpy as np
 from sklearn import  tree
 
